@@ -1,7 +1,11 @@
 const express = require('express');
+const app = express()
+const authMiddleware = require('./middleware/index');
 const sendEmail = require('./sendEmail');
 const {validateData, setReponse} = require('./utils');
 const routes = express.Router();
+
+authMiddleware(routes);
 
 routes.post('/', (req, res) => { 
     const validate = validateData(req.body);
