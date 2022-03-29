@@ -15,14 +15,15 @@ const validateData = (post) => {
     }
 }
 
-const setReponse = (status, msg='', statusCode=200, ...rest) => {
+const setReponse = (status, msg='', statusCode=200, data, ...rest) => {
     const response = {
         status: status === 1 ? 'ok' : 'error',
         message: msg,
         statusCode,
+        data,
         ...rest
     }
-    console.log(response);
+
     return response
 }
 

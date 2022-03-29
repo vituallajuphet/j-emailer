@@ -1,13 +1,7 @@
-const express = require('express');
-const app = express()
-const authMiddleware = require('./middleware/index');
-const sendEmail = require('./sendEmail');
-const {validateData, setReponse} = require('./utils');
-const routes = express.Router();
+const sendEmail = require("../../sendEmail");
+const { validateData, setReponse } = require("../../utils");
 
-authMiddleware(routes);
-
-routes.post('/', (req, res) => { 
+const send_email = (req, res) => {
     const validate = validateData(req.body);
     if(validate.status === 'ok'){
         const { body = {} } = req
@@ -19,6 +13,8 @@ routes.post('/', (req, res) => {
     }else{
         res.status(401).json(setReponse(0, "invalid request", 401));
     }  
-})
+}
 
-module.exports = routes;
+module.exports = {
+    send_email
+}

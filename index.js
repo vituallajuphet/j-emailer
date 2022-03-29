@@ -1,17 +1,11 @@
 const express = require('express');
 const bodyParser = require("body-parser");
-const app = express();
-const router = express.Router();
+const applyRouting = require('./src/routes');
+const server = express();
 const port = process.env.PORT || 4000
-const routes = require('./src/routes')
-const cors = require('cors')
 
-app.use(cors({origin:true}))
+applyRouting(server)
 
-app.use(bodyParser.urlencoded({ extended: false }))
-
-app.use('/api', routes)
-
-app.listen(port, () => {
+server.listen(port, () => {
     console.log('app is up and running port: '+port);
 })

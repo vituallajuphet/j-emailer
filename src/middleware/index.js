@@ -1,11 +1,7 @@
+const { isAuthenticated } = require("../controllers/authController");
 
-
-
-const authMiddleware = (router) => {
-    router.use((req, res, next) => {
-        
-        next()
-    })
+const authMiddleware = (server) => {
+  server.use(isAuthenticated);
 }
 
 module.exports = authMiddleware;
