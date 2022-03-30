@@ -1,7 +1,7 @@
 const emailRoutes = require("./email");
 const userRoutes = require("./users");
 const authMiddleware = require("../middleware");
-const cors = require('cors');
+const cors = require('cors'); 
 const bodyParser = require("body-parser");
 const { setReponse } = require("../utils");
 

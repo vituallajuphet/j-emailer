@@ -11,7 +11,7 @@ const userRoutes = require('express').Router()
 userRoutes.get('/users/', user_list)
 userRoutes.get('/users/:id', user_detail)
 userRoutes.post('/users/', user_insert)
-userRoutes.put('/users/', user_update)
+userRoutes.put('/users/:id', user_update)
 userRoutes.delete('/users/', user_delete)
 
 module.exports = userRoutes;

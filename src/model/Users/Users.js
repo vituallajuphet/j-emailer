@@ -3,7 +3,7 @@ const db = new DB()
 const con = db.getCon()
 const TBL = 'tbl_users';
 
-const all = async () => {
+const all = () => {
     return new Promise((resolve, reject) => {
         con.get(TBL, (err, response) => {
             if (err) reject(err)
@@ -13,18 +13,29 @@ const all = async () => {
 }
 
 const insert = async (params) => {
+    try {
+        return await con.returning('id').insert(TBL, params);
+    } catch (error) {
+        return error
+    }
+}
+ 
+const find =  (params) => {
+    const {select, where} = params;
     return new Promise((resolve, reject) => {
-       try {
-        const res =  con.returning('id').insert(TBL, params);
-        resolve(res)
-       } catch (error) {
-        reject(error)
-       }
-    });
+        con.select(select)
+        .where(where)
+        .get(TBL, (err, res) => {
+            if (err) reject(err)
+            resolve(res)
+        });
+    })
 }
 
 const Users = {
-    all
+    all,
+    insert,
+    find
 }
 
 module.exports = Users
